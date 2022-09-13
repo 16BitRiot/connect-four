@@ -17,9 +17,11 @@ const emptyColumn = Array.apply(null, Array(WIDTH));
 let yAxis = emptyColumn;
 
 // make yaxis
+// ***** this adds the # for the Y axis, may need to be removed
 const makeYaxis = function(){
-  yAxis.forEach(function(el, id) {y = id; yAxis[id] = [y, x];})
+  yAxis.forEach(function(el, id) {yAxis[id] = [y, x];})
 }
+
 
  /** makeBoard: create in-JS board structure:
   *    board = array of rows, each row is array of cells  (board[y][x])
@@ -31,15 +33,10 @@ const makeYaxis = function(){
    // Run yAxis creator
    makeYaxis();
 
-  //  Set board ** NOTE ** Only x numbers in the matrix are currently set
+  //  Set board ** NOTE ** Only y numbers in the matrix are currently set
    const setBoard = [...Array(HEIGHT)].forEach((element, i) => {board.push(yAxis)});
-    return board;
-    function resetXY(){
-        x = 0;
-        y = 0;
     }
-    resetXY()
- }
+
 
 /** makeHtmlBoard: make HTML table and row of column tops. */
 // ******WORKSHEET********  
@@ -54,6 +51,7 @@ const gameBoard = document.getElementById(`board`);
     top.setAttribute("id", "column-top");
     top.addEventListener("click", handleClick);
   
+    // Create X Axis (Columns)
     for (var x = 0; x < WIDTH; x++) {
       var headCell = document.createElement("td");
       headCell.setAttribute("id", x);
@@ -62,6 +60,7 @@ const gameBoard = document.getElementById(`board`);
     htmlBoard.append(top);
   
     // TODO: add comment for this code
+    // create Y Axis (Rows)
     for (var y = 0; y < HEIGHT; y++) {
       const row = document.createElement("tr");
       for (var x = 0; x < WIDTH; x++) {
