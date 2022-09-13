@@ -43,7 +43,7 @@ const makeYaxis = function(){
 
 function makeHtmlBoard() {
   // TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
-const gameBoard = document.getElementById(`board`);
+const htmlBoard = document.getElementById(`board`);
 
   // TODO: add comment for this code
   // Create clickable element
