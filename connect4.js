@@ -7,17 +7,36 @@
 
  const WIDTH = 7;
  const HEIGHT = 6;
- 
  let currPlayer = 1; // active player: 1 or 2
  let board = []; // array of rows, each row is array of cells  (board[y][x])
 
-/** makeBoard: create in-JS board structure:
- *    board = array of rows, each row is array of cells  (board[y][x])
- */
+//  new vars
+let x = 0;
+let y = 0;
+const emptyColumn = Array.apply(null, Array(WIDTH));
+let yAxis = emptyColumn;
 
-function makeBoard() {
-  // TODO: set "board" to empty HEIGHT x WIDTH matrix array
+// make yaxis
+const makeYaxis = function(){
+  yAxis.forEach(function(el, id) {y = id; yAxis[id] = [y, x];
+  })
 }
+
+ /** makeBoard: create in-JS board structure:
+  *    board = array of rows, each row is array of cells  (board[y][x])
+  */
+ 
+ function makeBoard() {
+   // TODO: set "board" to empty HEIGHT x WIDTH matrix array
+
+   // Run yAxis creator
+   makeYaxis();
+
+  //  Set board ** NOTE ** Only y numbers in the matrix are currently set
+   const setBoard = [...Array(HEIGHT)].forEach((element, i) => {board.push(yAxis)});
+    return board;
+ }
+
 
 /** makeHtmlBoard: make HTML table and row of column tops. */
 

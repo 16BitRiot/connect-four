@@ -7,17 +7,13 @@
 
  const WIDTH = 7;
  const HEIGHT = 6;
- 
  let currPlayer = 1; // active player: 1 or 2
  let board = []; // array of rows, each row is array of cells  (board[y][x])
 
 //  new vars
 let x = 0;
 let y = 0;
-let yXline = [];
-let yX = [y, x];
-
-const emptyColumn = Array.apply(null, Array(HEIGHT));
+const emptyColumn = Array.apply(null, Array(WIDTH));
 let yAxis = emptyColumn;
 
 // make yaxis
@@ -26,11 +22,6 @@ const makeYaxis = function(){
   })
 }
 
-
-// function in progress:inserts 1 y/x array in index 0-5 in Yxline
-// can be used if width can be created w/ one variable (replace yX here)
-function tester() {yXline = [...Array(HEIGHT)].fill(yAxis, 0);}
-
  /** makeBoard: create in-JS board structure:
   *    board = array of rows, each row is array of cells  (board[y][x])
   */
@@ -38,15 +29,13 @@ function tester() {yXline = [...Array(HEIGHT)].fill(yAxis, 0);}
  function makeBoard() {
    // TODO: set "board" to empty HEIGHT x WIDTH matrix array
 
-   // create height: push 6 arrays w/ [y, x]to board  
+   // Run yAxis creator
    makeYaxis();
-   const setBoard = [...Array(WIDTH)].forEach((element, i) => {board.push(yAxis)});
-    console.log(board);
-    //  board.forEach((element, id) => {console.log(element); console.log(id)});
 
+  //  Set board ** NOTE ** Only y numbers in the matrix are currently set
+   const setBoard = [...Array(HEIGHT)].forEach((element, i) => {board.push(yAxis)});
+    return board;
  }
-
-
 
 
 
@@ -64,4 +53,12 @@ function tester() {yXline = [...Array(HEIGHT)].fill(yAxis, 0);}
 //  }
 // let rowBlock = [[], [], [], [], [], []];mak
 //  }
+
+// function in progress:inserts 1 y/x array in index 0-5 in Yxline
+// let yXline = [];
+// can be used if width can be created w/ one variable (replace yX here)
+// function tester() {yXline = [...Array(HEIGHT)].fill(yAxis, 0);}
+
+// let yX = [y, x];
+
 // *****************************************************************
