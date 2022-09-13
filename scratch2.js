@@ -51,6 +51,7 @@ const htmlBoard = document.getElementById(`board`);
   top.setAttribute("id", "column-top");
   top.addEventListener("click", handleClick);
 
+
   // Create X Axis (Columns)
   for (var x = 0; x < WIDTH; x++) {
     var headCell = document.createElement("td");
@@ -72,7 +73,10 @@ const htmlBoard = document.getElementById(`board`);
   }
 }
 
+
+
 /** findSpotForCol: given column x, return top empty y (null if filled) */
+// ********************come back to this one**********************
 
 function findSpotForCol(x) {
   // TODO: write the real version of this, rather than always returning 0
@@ -96,6 +100,9 @@ function endGame(msg) {
 function handleClick(evt) {
   // get x from ID of clicked cell
   var x = +evt.target.id;
+
+// test
+console.log("hi")
 
   // get next spot in column (if none, ignore click)
   var y = findSpotForCol(x);
