@@ -18,8 +18,7 @@ let yAxis = emptyColumn;
 
 // make yaxis
 const makeYaxis = function(){
-  yAxis.forEach(function(el, id) {y = id; yAxis[id] = [y, x];
-  })
+  yAxis.forEach(function(el, id) {y = id; yAxis[id] = [y, x];})
 }
 
  /** makeBoard: create in-JS board structure:
@@ -32,7 +31,7 @@ const makeYaxis = function(){
    // Run yAxis creator
    makeYaxis();
 
-  //  Set board ** NOTE ** Only y numbers in the matrix are currently set
+  //  Set board ** NOTE ** Only x numbers in the matrix are currently set
    const setBoard = [...Array(HEIGHT)].forEach((element, i) => {board.push(yAxis)});
     return board;
  }
