@@ -34,6 +34,11 @@ const makeYaxis = function(){
   //  Set board ** NOTE ** Only x numbers in the matrix are currently set
    const setBoard = [...Array(HEIGHT)].forEach((element, i) => {board.push(yAxis)});
     return board;
+    function resetXY(){
+        x = 0;
+        y = 0;
+    }
+    resetXY()
  }
 
 /** makeHtmlBoard: make HTML table and row of column tops. */
@@ -44,7 +49,8 @@ function makeHtmlBoard() {
 const gameBoard = document.getElementById(`board`);
 
     // TODO: add comment for this code
-    var top = document.createElement("tr");
+    // Create clickable element
+    const top = document.createElement("tr");
     top.setAttribute("id", "column-top");
     top.addEventListener("click", handleClick);
   
