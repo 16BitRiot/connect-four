@@ -39,15 +39,19 @@ const makeYaxis = function(){
 
 
 /** makeHtmlBoard: make HTML table and row of column tops. */
+// ******WORKSHEET********  
 
 function makeHtmlBoard() {
   // TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
+const gameBoard = document.getElementById(`board`);
 
   // TODO: add comment for this code
-  var top = document.createElement("tr");
+  // Create clickable element
+  const top = document.createElement("tr");
   top.setAttribute("id", "column-top");
   top.addEventListener("click", handleClick);
 
+  // Create X Axis (Columns)
   for (var x = 0; x < WIDTH; x++) {
     var headCell = document.createElement("td");
     headCell.setAttribute("id", x);
@@ -56,6 +60,7 @@ function makeHtmlBoard() {
   htmlBoard.append(top);
 
   // TODO: add comment for this code
+  // create Y Axis (Rows)
   for (var y = 0; y < HEIGHT; y++) {
     const row = document.createElement("tr");
     for (var x = 0; x < WIDTH; x++) {
