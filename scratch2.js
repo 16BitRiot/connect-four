@@ -11,14 +11,12 @@
  let board = []; // array of rows, each row is array of cells  (board[y][x])
 
 //  new vars
-let x = 0;
-let y = 0;
 const emptyColumn = Array.apply(null, Array(WIDTH));
 let yAxis = emptyColumn;
 
 // make yaxis
 const makeYaxis = function(){
-  yAxis.forEach(function(el, id) {y = id; yAxis[id] = [y, x];
+  yAxis.forEach(function(el, id) {yAxis[id] = [0, 0];
   })
 }
 
@@ -98,7 +96,7 @@ function endGame(msg) {
 function handleClick(evt) {
   // get x from ID of clicked cell
   var x = +evt.target.id;
-
+    console.log(evt.target.id)
 // test
 console.log("hi")
 console.log(evt)
