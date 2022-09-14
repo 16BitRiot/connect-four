@@ -73,8 +73,6 @@ const htmlBoard = document.getElementById(`board`);
   }
 }
 
-
-
 /** findSpotForCol: given column x, return top empty y (null if filled) */
 // ********************come back to this one**********************
 
@@ -103,6 +101,7 @@ function handleClick(evt) {
 
 // test
 console.log("hi")
+console.log(evt)
 
   // get next spot in column (if none, ignore click)
   var y = findSpotForCol(x);
