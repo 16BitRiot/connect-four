@@ -68,7 +68,7 @@ const htmlBoard = document.getElementById(`board`);
   }
 }
 
-
+// test ****delete later 
 
 
 /** findSpotForCol: given column x, return top empty y (null if filled) */
