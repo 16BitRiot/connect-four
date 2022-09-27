@@ -78,9 +78,12 @@ function findSpotForCol(x) {
         for (let i = 0; i < HEIGHT; i++){
             const cellSelect = document.getElementById(`${i}-${x}`);
             lowestY = cellSelect;
-            if (cellSelect.hasChildNodes === true){
-                console.log("found one!")
-            }
+            const cellCheck = cellSelect.hasChildNodes();
+            console.log(cellCheck);
+            console.log('help');
+            // if (cellSelect.hasChildNodes() = true){
+            //     console.log("found one!")
+            // }
     }
     return 0;
 }
