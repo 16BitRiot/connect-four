@@ -10,15 +10,11 @@
  let currPlayer = 1; // active player: 1 or 2
  let board = []; // array of rows, each row is array of cells  (board[y][x])
 
-//  new vars
-let x = 0;
-let y = 0;
+// make yaxis
 const emptyColumn = Array.apply(null, Array(WIDTH));
 let yAxis = emptyColumn;
-
-// make yaxis
 const makeYaxis = function(){
-  yAxis.forEach(function(el, id) {y = id; yAxis[id] = [y, x];
+  yAxis.forEach(function(el, id) {yAxis[id] = [0, 0];
   })
 }
 
@@ -32,14 +28,13 @@ const makeYaxis = function(){
    // Run yAxis creator
    makeYaxis();
 
-  //  Set board ** NOTE ** Only y numbers in the matrix are currently set
+  //  Set board 
    const setBoard = [...Array(HEIGHT)].forEach((element, i) => {board.push(yAxis)});
     return board;
  }
 
 
 /** makeHtmlBoard: make HTML table and row of column tops. */
-// ******WORKSHEET********  
 
 function makeHtmlBoard() {
   // TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
@@ -50,6 +45,7 @@ const htmlBoard = document.getElementById(`board`);
   const top = document.createElement("tr");
   top.setAttribute("id", "column-top");
   top.addEventListener("click", handleClick);
+
 
   // Create X Axis (Columns)
   for (var x = 0; x < WIDTH; x++) {
@@ -72,11 +68,21 @@ const htmlBoard = document.getElementById(`board`);
   }
 }
 
-/** findSpotForCol: given column x, return top empty y (null if filled) */
 
+
+/** findSpotForCol: given column x, return top empty y (null if filled) */
+let lowestY = '';
 function findSpotForCol(x) {
   // TODO: write the real version of this, rather than always returning 0
-  return 0;
+    console.log(x);
+        for (let i = 0; i < HEIGHT; i++){
+            const cellSelect = document.getElementById(`${i}-${x}`);
+            lowestY = cellSelect;
+            if (cellSelect.hasChildNodes === true){
+                console.log("found one!")
+            }
+    }
+    return 0;
 }
 
 /** placeInTable: update DOM to place piece into HTML table of board */
