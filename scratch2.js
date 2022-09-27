@@ -68,19 +68,22 @@ const htmlBoard = document.getElementById(`board`);
   }
 }
 
-// test ****delete later 
 
 
 /** findSpotForCol: given column x, return top empty y (null if filled) */
-
+let lowestY = '';
 function findSpotForCol(x) {
   // TODO: write the real version of this, rather than always returning 0
-
-  // **top row event listener
-const topRow = document.getElementById("column-top");
-topRow.addEventListener('click', e => {console.log(e)});
-
-  return 0;
+    console.log(x);
+        for (let i = 0; i < HEIGHT; i++){
+            const cellSelect = document.getElementById(`${i}-${x}`);
+            if (cellSelect.hasChildNodes !== true) {
+            console.log("empty!");
+            lowestY = cellSelect;
+        }
+        console.log(cellSelect);
+    }
+    return 0;
 }
 
 /** placeInTable: update DOM to place piece into HTML table of board */
