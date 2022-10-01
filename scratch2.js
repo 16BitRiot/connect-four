@@ -95,8 +95,13 @@ function findSpotForCol(x) {
 function placeInTable(y, x) {
   // TODO: make a div and insert into correct table cell
   // debugger
-  console.log(y);
+
+  // Create div
   y.appendChild(document.createElement("div"));
+
+  // add CSS to div
+  
+  
 }
 
 /** endGame: announce game end */
