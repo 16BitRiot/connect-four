@@ -73,22 +73,28 @@ const htmlBoard = document.getElementById(`board`);
 /** findSpotForCol: given column x, return top empty y (null if filled) */
 let lowestY = '';
 function findSpotForCol(x) {
+    // debugger
   // TODO: write the real version of this, rather than always returning 0
     console.log(x);
         for (let i = 0; i < HEIGHT; i++){
             const cellSelect = document.getElementById(`${i}-${x}`);
+            const emptySelect = document.getElementById(`${i-1}-${x}`);
             lowestY = cellSelect;
-            if (lowestY.hasChildNodes === true){
-                console.log("found one!")
+            const spotChecker = lowestY.hasChildNodes();
+            console.log(spotChecker);
+            if (spotChecker === true){
+              lowestY = emptySelect;
+                return;
             }
     }
-    return 0;
+    return lowestY;
 }
 
 /** placeInTable: update DOM to place piece into HTML table of board */
 
 function placeInTable(y, x) {
   // TODO: make a div and insert into correct table cell
+  
 }
 
 /** endGame: announce game end */
