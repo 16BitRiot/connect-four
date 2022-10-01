@@ -96,11 +96,10 @@ function placeInTable(y, x) {
   // TODO: make a div and insert into correct table cell
   // debugger
 
+  let makeDiv = document.createElement('div');
+  let bluePiece = makeDiv.classList.add("bluePiece");
   // Create div
-  y.appendChild(document.createElement("div"));
-
-  // add CSS to div
-  
+  y.appendChild(makeDiv);
   
 }
 
@@ -116,7 +115,6 @@ function endGame(msg) {
 function handleClick(evt) {
   // get x from ID of clicked cell
   let x = +evt.target.id;
-
 
   // get next spot in column (if none, ignore click)
   let y = findSpotForCol(x);
@@ -138,6 +136,15 @@ function handleClick(evt) {
 
   // switch players
   // TODO: switch currPlayer 1 <-> 2
+  function updatePlayer () {
+    if (currPlayer === 1){
+        return currPlayer = 2;
+    }
+        if (currPlayer === 2){
+        return currPlayer = 1;
+    }
+  }
+  updatePlayer();
 }
 
 /** checkForWin: check board cell-by-cell for "does a win start here?" */
