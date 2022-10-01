@@ -67,24 +67,24 @@ const htmlBoard = document.getElementById(`board`);
     htmlBoard.append(row);
   }
 }
-
-
+ 
 
 /** findSpotForCol: given column x, return top empty y (null if filled) */
 let lowestY = '';
+let yNum = 0;
 function findSpotForCol(x) {
     // debugger
   // TODO: write the real version of this, rather than always returning 0
-    console.log(x);
         for (let i = 0; i < HEIGHT; i++){
             const cellSelect = document.getElementById(`${i}-${x}`);
             const emptySelect = document.getElementById(`${i-1}-${x}`);
             lowestY = cellSelect;
+            yNum = i;
             const spotChecker = lowestY.hasChildNodes();
-            console.log(spotChecker);
             if (spotChecker === true){
-              lowestY = emptySelect;
-                return;
+              yNum = i-1;
+              return lowestY = emptySelect;
+                
             }
     }
     return lowestY;
@@ -94,7 +94,9 @@ function findSpotForCol(x) {
 
 function placeInTable(y, x) {
   // TODO: make a div and insert into correct table cell
-  
+  // debugger
+  console.log(y);
+  y.appendChild(document.createElement("div"));
 }
 
 /** endGame: announce game end */
@@ -108,7 +110,6 @@ function endGame(msg) {
 function handleClick(evt) {
   // get x from ID of clicked cell
   var x = +evt.target.id;
-    console.log(x)
 
 
   // get next spot in column (if none, ignore click)
