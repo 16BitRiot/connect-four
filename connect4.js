@@ -14,7 +14,7 @@
 const emptyColumn = Array.apply(null, Array(WIDTH));
 let yAxis = emptyColumn;
 const makeYaxis = function(){
-  yAxis.forEach(function(el, id) {yAxis[id] = [0, 0];
+  yAxis.forEach(function(el, id) {yAxis[id] = [0, 1];
   })
 }
 
@@ -68,6 +68,7 @@ const htmlBoard = document.getElementById(`board`);
   }
 }
  
+   
 
 /** findSpotForCol: given column x, return top empty y (null if filled) */
 let lowestY = '';
@@ -95,12 +96,18 @@ function findSpotForCol(x) {
 function placeInTable(y, x) {
   // TODO: make a div and insert into correct table cell
   // debugger
-
+  if (currPlayer === 1) {
   let makeDiv = document.createElement('div');
-  let bluePiece = makeDiv.classList.add("bluePiece");
+  let bluePiece = makeDiv.classList.add("bluePiece", currPlayer);
   // Create div
   y.appendChild(makeDiv);
-  
+  }
+  if (currPlayer === 2) {
+  let makeDiv = document.createElement('div');
+  let redPiece = makeDiv.classList.add("redPiece", currPlayer);
+  // Create div
+  y.appendChild(makeDiv);
+  }
 }
 
 /** endGame: announce game end */
@@ -108,48 +115,11 @@ function placeInTable(y, x) {
 function endGame(msg) {
   // TODO: pop up alert message
   alert(msg);
+
 }
-
-/** handleClick: handle click of column top to play piece */
-
-function handleClick(evt) {
-  // get x from ID of clicked cell
-  let x = +evt.target.id;
-
-  // get next spot in column (if none, ignore click)
-  let y = findSpotForCol(x);
-  if (y === null) {
-    return;
-  }
-
-  // place piece in board and add to HTML table
-  // TODO: add line to update in-memory board
-  placeInTable(y, x);
-
-  // check for win
-  if (checkForWin()) {
-    return endGame(`Player ${currPlayer} won!`);
-  }
-
-  // check for tie
-  // TODO: check if all cells in board are filled; if so call, call endGame
-
-  // switch players
-  // TODO: switch currPlayer 1 <-> 2
-  function updatePlayer () {
-    if (currPlayer === 1){
-        return currPlayer = 2;
-    }
-        if (currPlayer === 2){
-        return currPlayer = 1;
-    }
-  }
-  updatePlayer();
-}
-
 /** checkForWin: check board cell-by-cell for "does a win start here?" */
-
 function checkForWin() {
+  // debugger
   function _win(cells) {
     // Check four cells to see if they're all color of current player
     //  - cells: list of four (y, x) cells
@@ -167,12 +137,13 @@ function checkForWin() {
 
   // TODO: read and understand this code. Add comments to help you.
 
-  for (var y = 0; y < HEIGHT; y++) {
-    for (var x = 0; x < WIDTH; x++) {
-      var horiz = [[y, x], [y, x + 1], [y, x + 2], [y, x + 3]];
-      var vert = [[y, x], [y + 1, x], [y + 2, x], [y + 3, x]];
-      var diagDR = [[y, x], [y + 1, x + 1], [y + 2, x + 2], [y + 3, x + 3]];
-      var diagDL = [[y, x], [y + 1, x - 1], [y + 2, x - 2], [y + 3, x - 3]];
+  for (let y = 0; y < HEIGHT; y++) {
+    // debugger
+    for (let x = 0; x < WIDTH; x++) {
+      let horiz = [[y, x], [y, x + 1], [y, x + 2], [y, x + 3]];
+      let vert = [[y, x], [y + 1, x], [y + 2, x], [y + 3, x]];
+      let diagDR = [[y, x], [y + 1, x + 1], [y + 2, x + 2], [y + 3, x + 3]];
+      let diagDL = [[y, x], [y + 1, x - 1], [y + 2, x - 2], [y + 3, x - 3]];
 
       if (_win(horiz) || _win(vert) || _win(diagDR) || _win(diagDL)) {
         return true;
@@ -180,6 +151,54 @@ function checkForWin() {
     }
   }
 }
+
+
+/** handleClick: handle click of column top to play piece */
+
+function handleClick(evt) {
+  // get x from ID of clicked cell
+  let x = +evt.target.id;
+  // debugger
+  // get next spot in column (if none, ignore click)
+  let y = findSpotForCol(x);
+  if (y === null) {
+    return;
+  }
+
+  // place piece in board and add to HTML table
+  // TODO: add line to update in-memory board
+  placeInTable(y, x);
+
+  // check for win
+  if (checkForWin()) {
+    return endGame(`Player ${currPlayer} won!`);
+  }
+
+  // check for tie
+  // TODO: check if all cells in board are filled; if so call, call endGame
+  const allDiv = document.querySelectorAll("div")
+  function draw() {
+    if (allDiv.length === 43){
+        alert ("DRAW")
+    }
+    
+  }
+  draw();
+  // switch players
+  // TODO: switch currPlayer 1 <-> 2
+  function updatePlayer () {
+    if (currPlayer === 1){
+        return currPlayer = 2;
+    }
+        if (currPlayer === 2){
+        return currPlayer = 1;
+    }
+  }
+  updatePlayer();
+}
+
+
+
 
 makeBoard();
 makeHtmlBoard();
