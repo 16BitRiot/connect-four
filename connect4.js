@@ -67,47 +67,57 @@ const htmlBoard = document.getElementById(`board`);
     htmlBoard.append(row);
   }
 }
-
-
+ 
 
 /** findSpotForCol: given column x, return top empty y (null if filled) */
 let lowestY = '';
+let yNum = 0;
 function findSpotForCol(x) {
+    // debugger
   // TODO: write the real version of this, rather than always returning 0
-    console.log(x);
         for (let i = 0; i < HEIGHT; i++){
             const cellSelect = document.getElementById(`${i}-${x}`);
+            const emptySelect = document.getElementById(`${i-1}-${x}`);
             lowestY = cellSelect;
-            const cellCheck = cellSelect.hasChildNodes();
-            console.log(cellCheck);
-            console.log('help');
-            // if (cellSelect.hasChildNodes() = true){
-            //     console.log("found one!")
-            // }
+            yNum = i;
+            const spotChecker = lowestY.hasChildNodes();
+            if (spotChecker === true){
+              yNum = i-1;
+              return lowestY = emptySelect;
+                
+            }
     }
-    return 0;
+    return lowestY;
 }
 
 /** placeInTable: update DOM to place piece into HTML table of board */
 
 function placeInTable(y, x) {
   // TODO: make a div and insert into correct table cell
+  // debugger
+
+  let makeDiv = document.createElement('div');
+  let bluePiece = makeDiv.classList.add("bluePiece");
+  // Create div
+  y.appendChild(makeDiv);
+  
 }
 
 /** endGame: announce game end */
 
 function endGame(msg) {
   // TODO: pop up alert message
+  alert(msg);
 }
 
 /** handleClick: handle click of column top to play piece */
 
 function handleClick(evt) {
   // get x from ID of clicked cell
-  var x = +evt.target.id;
+  let x = +evt.target.id;
 
   // get next spot in column (if none, ignore click)
-  var y = findSpotForCol(x);
+  let y = findSpotForCol(x);
   if (y === null) {
     return;
   }
@@ -126,6 +136,15 @@ function handleClick(evt) {
 
   // switch players
   // TODO: switch currPlayer 1 <-> 2
+  function updatePlayer () {
+    if (currPlayer === 1){
+        return currPlayer = 2;
+    }
+        if (currPlayer === 2){
+        return currPlayer = 1;
+    }
+  }
+  updatePlayer();
 }
 
 /** checkForWin: check board cell-by-cell for "does a win start here?" */
