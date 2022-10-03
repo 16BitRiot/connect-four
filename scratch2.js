@@ -14,7 +14,7 @@
 const emptyColumn = Array.apply(null, Array(WIDTH));
 let yAxis = emptyColumn;
 const makeYaxis = function(){
-  yAxis.forEach(function(el, id) {yAxis[id] = [0, 0];
+  yAxis.forEach(function(el, id) {yAxis[id] = [0, 1];
   })
 }
 
@@ -68,6 +68,7 @@ const htmlBoard = document.getElementById(`board`);
   }
 }
  
+   
 
 /** findSpotForCol: given column x, return top empty y (null if filled) */
 let lowestY = '';
@@ -118,6 +119,7 @@ function endGame(msg) {
 }
 /** checkForWin: check board cell-by-cell for "does a win start here?" */
 function checkForWin() {
+  // debugger
   function _win(cells) {
     // Check four cells to see if they're all color of current player
     //  - cells: list of four (y, x) cells
@@ -136,6 +138,7 @@ function checkForWin() {
   // TODO: read and understand this code. Add comments to help you.
 
   for (let y = 0; y < HEIGHT; y++) {
+    // debugger
     for (let x = 0; x < WIDTH; x++) {
       let horiz = [[y, x], [y, x + 1], [y, x + 2], [y, x + 3]];
       let vert = [[y, x], [y + 1, x], [y + 2, x], [y + 3, x]];
