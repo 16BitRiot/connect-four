@@ -10,13 +10,13 @@
  let currPlayer = 1; // active player: 1 or 2
  let board = []; // array of rows, each row is array of cells  (board[y][x])
 
-// make yaxis
-const emptyColumn = Array.apply(null, Array(WIDTH));
-let yAxis = emptyColumn;
-const makeYaxis = function(){
-  yAxis.forEach(function(el, id) {yAxis[id] = [0, 1];
-  })
-}
+// make empty row
+const emptyRow = Array.apply(null, Array(WIDTH));
+
+// const makeYaxis = function(){
+//   yAxis.forEach(function(el, id) {yAxis[id];
+//   })
+// }
 
  /** makeBoard: create in-JS board structure:
   *    board = array of rows, each row is array of cells  (board[y][x])
@@ -25,11 +25,8 @@ const makeYaxis = function(){
  function makeBoard() {
    // TODO: set "board" to empty HEIGHT x WIDTH matrix array
 
-   // Run yAxis creator
-   makeYaxis();
-
   //  Set board 
-   const setBoard = [...Array(HEIGHT)].forEach((element, i) => {board.push(yAxis)});
+   const setBoard = [...Array(HEIGHT)].forEach((element, i) => {board.push(emptyRow)});
     return board;
  }
 
