@@ -11,6 +11,7 @@
  let board = []; 
  const emptyRow = Array.apply(null, Array(WIDTH)); // make empty row
 
+
  /** makeBoard: create in-JS board structure:
   *  board = array of rows, each row is array of cells  (board[y][x])*/
  
@@ -18,7 +19,9 @@
    // **TODO: set "board" to empty HEIGHT x WIDTH matrix array
 
   //  Set board 
-   const setBoard = [...Array(HEIGHT)].forEach((element, i) => {board.push(emptyRow)});
+   const setBoard = [...Array(HEIGHT)].forEach((element, i) => {board.push(emptyRow2)});
+  //  const setBoard = [...Array(HEIGHT)].forEach((element, i) => {for (let e of this)board.push([i, "test"])});
+  
     return board;
  }
 
@@ -57,17 +60,14 @@ const htmlBoard = document.getElementById(`board`);
  
 /** findSpotForCol: given column x, return top empty y (null if filled) */
 let lowestY = '';
-let yNum = 0;
 function findSpotForCol(x) {
   // **TODO: write the real version of this, rather than always returning 0
         for (let i = 0; i < HEIGHT; i++){
             const cellSelect = document.getElementById(`${i}-${x}`);
             const emptySelect = document.getElementById(`${i-1}-${x}`);
             lowestY = cellSelect;
-            yNum = i;
             const spotChecker = lowestY.hasChildNodes();
             if (spotChecker === true){
-              yNum = i-1;
               return lowestY = emptySelect;
                 
             }
@@ -164,6 +164,7 @@ function handleClick(evt) {
     
   }
   draw();
+
   // switch players
   // **TODO: switch currPlayer 1 <-> 2
   function updatePlayer () {
@@ -179,3 +180,14 @@ function handleClick(evt) {
 
 makeBoard();
 makeHtmlBoard();
+
+// const tester = function() {
+//   for (let i = 0; i < HEIGHT; i++) {                    
+//         console.log(i);
+//           for (let z = 0; z < WIDTH; z++){
+//             console.log(i, z);
+//             const IZ = [i, z];
+//             board.insert(i, z)
+//           }
+// }};
+
