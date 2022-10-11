@@ -19,7 +19,7 @@
    // **TODO: set "board" to empty HEIGHT x WIDTH matrix array
 
   //  Set board 
-   const setBoard = [...Array(HEIGHT)].forEach((element, i) => {board.push(emptyRow2)});
+   const setBoard = [...Array(HEIGHT)].forEach((element, i) => {board.push(emptyRow)});
   //  const setBoard = [...Array(HEIGHT)].forEach((element, i) => {for (let e of this)board.push([i, "test"])});
   
     return board;
