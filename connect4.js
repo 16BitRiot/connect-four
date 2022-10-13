@@ -10,7 +10,8 @@ const HEIGHT = 6;
 let currPlayer = 1;
 let board = [];
 const emptyRow = Array.apply(null, Array(WIDTH)); // make empty row
-let htmlY = ``;
+let emptySelect = ``;
+// let htmlY = ``;
 let lowestY = '';
 
 /** makeBoard: create in-JS board structure:
@@ -24,7 +25,6 @@ function makeBoard() {
   for (let i = 0; i < HEIGHT; i++) {
     const emptyRow = Array.apply(null, Array(WIDTH));
     board.push(emptyRow);
-
   }
 
 
@@ -35,6 +35,7 @@ function makeBoard() {
 
 function makeHtmlBoard() {
   // **TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
+  // debugger
   const htmlBoard = document.getElementById(`board`);
 
   // **TODO: add comment for this code
@@ -44,9 +45,9 @@ function makeHtmlBoard() {
   top.addEventListener("click", handleClick);
 
   // Create X Axis (Columns)
-  for (var x = 0; x < WIDTH; x++) {
+  for (let z = 0; z < WIDTH; z++) {
     var headCell = document.createElement("td");
-    headCell.setAttribute("id", x);
+    headCell.setAttribute("id", z);
     top.append(headCell);
   }
   htmlBoard.append(top);
@@ -58,7 +59,9 @@ function makeHtmlBoard() {
     const row = document.createElement("tr");
     for (var x = 0; x < WIDTH; x++) {
       const cell = document.createElement("td");
-      cell.setAttribute("id", y);
+      const xY = `${y}-${x}`;
+      // debugger
+      cell.setAttribute("id", xY);
       row.append(cell);
     }
     htmlBoard.append(row);
@@ -71,16 +74,37 @@ function findSpotForCol(x) {
 
   // **TODO: write the real version of this, rather than always returning 0
   for (let i = 0; i < HEIGHT; i++) {
-    const cellSelect = document.getElementById(`${i}`-`${x}`);
-    const emptySelect = document.getElementById(`${i - 1}`-`${x}`);
-    lowestY = cellSelect;
-    const spotChecker = lowestY.hasChildNodes();
-    if (spotChecker === true) {
-      return lowestY = emptySelect;
-
+    debugger;
+    const HTMLCellSelect = document.getElementById(`${i}-${x}`);
+    const JSCellSelect = board[i][x];
+    if (JSCellSelect === undefined) {
+      lowestY = i;
+      emptySelect = HTMLCellSelect;
     }
+    if (JSCellSelect === 1) {
+      console.log('slot taken')
+      return i - 1;
+      // board[i-1][x] = currPlayer;
+    }
+    if (JSCellSelect === 2) {
+      console.log('slot taken')
+      return i - 1;
+      // board[i-1][x] = currPlayer;
+    }
+    if (lowestY === 5) {
+      return lowestY;
+    }
+
+    // htmlY = cellSelect;
+    // lowestY = i;
+    // const spotChecker = board[`${i}`][`${x}`];
+    // debugger
+    // if (spotChecker === undefined) {
+    //   return;
+    // }
+    // spotChecker = currPlayer;
   }
-  return lowestY;
+  return;
 
 }
 
@@ -88,20 +112,21 @@ function findSpotForCol(x) {
 
 function placeInTable(y, x) {
   // **TODO: make a div and insert into correct table cell
-  debugger
+
   if (currPlayer === 1) {
     let makeDiv = document.createElement('div');
     let bluePiece = makeDiv.classList.add("bluePiece", currPlayer);
     // Create div
-    htmlY.appendChild(makeDiv);
-    board[y, x] = currPlayer;
+    debugger
+    emptySelect.appendChild(makeDiv);
+    board[y][x] = currPlayer;
   }
   if (currPlayer === 2) {
     let makeDiv = document.createElement('div');
     let redPiece = makeDiv.classList.add("redPiece", currPlayer);
     // Create div
-    htmlY.appendChild(makeDiv);
-    board[y, x] = currPlayer;
+    emptySelect.appendChild(makeDiv);
+    board[y][x] = currPlayer;
   }
   console.log(x, y)
   // board[x][y] = currPlayer;
