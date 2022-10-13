@@ -5,31 +5,37 @@
  * board fills (tie)
  */
 
- const WIDTH = 7;
- const HEIGHT = 6;
- let currPlayer = 1; 
- let board = []; 
- const emptyRow = Array.apply(null, Array(WIDTH)); // make empty row
+const WIDTH = 7;
+const HEIGHT = 6;
+let currPlayer = 1;
+let board = [];
+const emptyRow = Array.apply(null, Array(WIDTH)); // make empty row
+let htmlY = ``;
+let lowestY = '';
 
+/** makeBoard: create in-JS board structure:
+ *  board = array of rows, each row is array of cells  (board[y][x])*/
 
- /** makeBoard: create in-JS board structure:
-  *  board = array of rows, each row is array of cells  (board[y][x])*/
- 
- function makeBoard() {
-   // **TODO: set "board" to empty HEIGHT x WIDTH matrix array
+function makeBoard() {
+  // **TODO: set "board" to empty HEIGHT x WIDTH matrix array
 
   //  Set board 
-   const setBoard = [...Array(HEIGHT)].forEach((element, i) => {board.push([])});
-  //  const setBoard = [...Array(HEIGHT)].forEach((element, i) => {for (let e of this)board.push([i, "test"])});
-  
-    return board;
- }
+
+  for (let i = 0; i < HEIGHT; i++) {
+    const emptyRow = Array.apply(null, Array(WIDTH));
+    board.push(emptyRow);
+
+  }
+
+
+  return board;
+}
 
 /** makeHtmlBoard: make HTML table and row of column tops. */
 
 function makeHtmlBoard() {
   // **TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
-const htmlBoard = document.getElementById(`board`);
+  const htmlBoard = document.getElementById(`board`);
 
   // **TODO: add comment for this code
   // Create clickable element
@@ -47,50 +53,58 @@ const htmlBoard = document.getElementById(`board`);
 
   // **TODO: add comment for this code
   // create Y Axis (Rows)
+
   for (var y = 0; y < HEIGHT; y++) {
     const row = document.createElement("tr");
     for (var x = 0; x < WIDTH; x++) {
       const cell = document.createElement("td");
-      cell.setAttribute("id", `${y}-${x}`);
+      cell.setAttribute("id", y);
       row.append(cell);
     }
     htmlBoard.append(row);
   }
 }
- 
+
 /** findSpotForCol: given column x, return top empty y (null if filled) */
-let lowestY = '';
+
 function findSpotForCol(x) {
+
   // **TODO: write the real version of this, rather than always returning 0
-        for (let i = 0; i < HEIGHT; i++){
-            const cellSelect = document.getElementById(`${i}-${x}`);
-            const emptySelect = document.getElementById(`${i-1}-${x}`);
-            lowestY = cellSelect;
-            const spotChecker = lowestY.hasChildNodes();
-            if (spotChecker === true){
-              return lowestY = emptySelect;
-                
-            }
+  for (let i = 0; i < HEIGHT; i++) {
+    const cellSelect = document.getElementById(`${i}`-`${x}`);
+    const emptySelect = document.getElementById(`${i - 1}`-`${x}`);
+    lowestY = cellSelect;
+    const spotChecker = lowestY.hasChildNodes();
+    if (spotChecker === true) {
+      return lowestY = emptySelect;
+
     }
-    return lowestY;
+  }
+  return lowestY;
+
 }
 
 /** placeInTable: update DOM to place piece into HTML table of board */
 
 function placeInTable(y, x) {
   // **TODO: make a div and insert into correct table cell
+  debugger
   if (currPlayer === 1) {
-  let makeDiv = document.createElement('div');
-  let bluePiece = makeDiv.classList.add("bluePiece", currPlayer);
-  // Create div
-  y.appendChild(makeDiv);
+    let makeDiv = document.createElement('div');
+    let bluePiece = makeDiv.classList.add("bluePiece", currPlayer);
+    // Create div
+    htmlY.appendChild(makeDiv);
+    board[y, x] = currPlayer;
   }
   if (currPlayer === 2) {
-  let makeDiv = document.createElement('div');
-  let redPiece = makeDiv.classList.add("redPiece", currPlayer);
-  // Create div
-  y.appendChild(makeDiv);
+    let makeDiv = document.createElement('div');
+    let redPiece = makeDiv.classList.add("redPiece", currPlayer);
+    // Create div
+    htmlY.appendChild(makeDiv);
+    board[y, x] = currPlayer;
   }
+  console.log(x, y)
+  // board[x][y] = currPlayer;
 }
 
 /** endGame: announce game end */
@@ -137,6 +151,7 @@ function checkForWin() {
 /** handleClick: handle click of column top to play piece */
 
 function handleClick(evt) {
+  debugger
   // get x from ID of clicked cell
   let x = +evt.target.id;
   // get next spot in column (if none, ignore click)
@@ -158,21 +173,23 @@ function handleClick(evt) {
   // **TODO: check if all cells in board are filled; if so call, call endGame
   const allDiv = document.querySelectorAll("div")
   function draw() {
-    if (allDiv.length === 43){
-        alert ("DRAW")
+    if (allDiv.length === 43) {
+      alert("DRAW")
     }
-    
+
   }
   draw();
 
   // switch players
   // **TODO: switch currPlayer 1 <-> 2
-  function updatePlayer () {
-    if (currPlayer === 1){
-        return currPlayer = 2;
+  // blue is player 1 red is player 2
+
+  function updatePlayer() {
+    if (currPlayer === 1) {
+      return currPlayer = 2;
     }
-        if (currPlayer === 2){
-        return currPlayer = 1;
+    if (currPlayer === 2) {
+      return currPlayer = 1;
     }
   }
   updatePlayer();
@@ -181,13 +198,14 @@ function handleClick(evt) {
 makeBoard();
 makeHtmlBoard();
 
-// const tester = function() {
-//   for (let i = 0; i < HEIGHT; i++) {                    
-//         console.log(i);
-//           for (let z = 0; z < WIDTH; z++){
-//             console.log(i, z);
-//             const IZ = [i, z];
-//             board.insert(i, z)
-//           }
-// }};
+// const tester = function () {
+//   for (let i = 0; i < HEIGHT; i++) {
+//     console.log(i);
+//     for (let z = 0; z < WIDTH; z++) {
+//       console.log(i, z);
+//       const IZ = [i, z];
+//       board.insert(i, z)
+//     }
+//   }
+// };
 
