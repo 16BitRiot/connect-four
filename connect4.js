@@ -11,31 +11,26 @@ let currPlayer = 1;
 let board = [];
 const emptyRow = Array.apply(null, Array(WIDTH)); // make empty row
 let emptySelect = ``;
-// let htmlY = ``;
 let lowestY = '';
+const resetButton = document.getElementById('resetbtn');
+resetButton.addEventListener('click', handleClick);
 
 /** makeBoard: create in-JS board structure:
  *  board = array of rows, each row is array of cells  (board[y][x])*/
 
 function makeBoard() {
   // **TODO: set "board" to empty HEIGHT x WIDTH matrix array
-
   //  Set board 
-
   for (let i = 0; i < HEIGHT; i++) {
     const emptyRow = Array.apply(null, Array(WIDTH));
     board.push(emptyRow);
   }
-
-
   return board;
 }
 
 /** makeHtmlBoard: make HTML table and row of column tops. */
-
 function makeHtmlBoard() {
   // **TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
-  // debugger
   const htmlBoard = document.getElementById(`board`);
 
   // **TODO: add comment for this code
@@ -60,7 +55,6 @@ function makeHtmlBoard() {
     for (var x = 0; x < WIDTH; x++) {
       const cell = document.createElement("td");
       const xY = `${y}-${x}`;
-      // debugger
       cell.setAttribute("id", xY);
       row.append(cell);
     }
@@ -74,7 +68,6 @@ function findSpotForCol(x) {
 
   // **TODO: write the real version of this, rather than always returning 0
   for (let i = 0; i < HEIGHT; i++) {
-    debugger;
     const HTMLCellSelect = document.getElementById(`${i}-${x}`);
     const JSCellSelect = board[i][x];
     if (JSCellSelect === undefined) {
@@ -82,27 +75,20 @@ function findSpotForCol(x) {
       emptySelect = HTMLCellSelect;
     }
     if (JSCellSelect === 1) {
-      console.log('slot taken')
+      if (i === 0){
+        return null;
+      }
       return i - 1;
-      // board[i-1][x] = currPlayer;
     }
     if (JSCellSelect === 2) {
-      console.log('slot taken')
+      if (i === 0){
+        return null;
+      }
       return i - 1;
-      // board[i-1][x] = currPlayer;
     }
     if (lowestY === 5) {
       return lowestY;
     }
-
-    // htmlY = cellSelect;
-    // lowestY = i;
-    // const spotChecker = board[`${i}`][`${x}`];
-    // debugger
-    // if (spotChecker === undefined) {
-    //   return;
-    // }
-    // spotChecker = currPlayer;
   }
   return;
 
@@ -117,7 +103,6 @@ function placeInTable(y, x) {
     let makeDiv = document.createElement('div');
     let bluePiece = makeDiv.classList.add("bluePiece", currPlayer);
     // Create div
-    debugger
     emptySelect.appendChild(makeDiv);
     board[y][x] = currPlayer;
   }
@@ -128,8 +113,6 @@ function placeInTable(y, x) {
     emptySelect.appendChild(makeDiv);
     board[y][x] = currPlayer;
   }
-  console.log(x, y)
-  // board[x][y] = currPlayer;
 }
 
 /** endGame: announce game end */
@@ -137,11 +120,9 @@ function placeInTable(y, x) {
 function endGame(msg) {
   // **TODO: pop up alert message
   alert(msg);
-
 }
 /** checkForWin: check board cell-by-cell for "does a win start here?" */
 function checkForWin() {
-  // debugger
   function _win(cells) {
     // Check four cells to see if they're all color of current player
     //  - cells: list of four (y, x) cells
@@ -176,7 +157,10 @@ function checkForWin() {
 /** handleClick: handle click of column top to play piece */
 
 function handleClick(evt) {
-  debugger
+  console.log(evt.target)
+  if (evt.target === resetButton){
+    window.location.reload();
+  }
   // get x from ID of clicked cell
   let x = +evt.target.id;
   // get next spot in column (if none, ignore click)
@@ -191,6 +175,8 @@ function handleClick(evt) {
 
   // check for win
   if (checkForWin()) {
+    const topColumn = document.body.querySelector("#column-top");
+    topColumn.removeEventListener('click', handleClick);
     return endGame(`Player ${currPlayer} won!`);
   }
 
@@ -200,6 +186,8 @@ function handleClick(evt) {
   function draw() {
     if (allDiv.length === 43) {
       alert("DRAW")
+      const topColumn = document.body.querySelector("#column-top");
+      topColumn.removeEventListener('click', handleClick);
     }
 
   }
@@ -222,15 +210,4 @@ function handleClick(evt) {
 
 makeBoard();
 makeHtmlBoard();
-
-// const tester = function () {
-//   for (let i = 0; i < HEIGHT; i++) {
-//     console.log(i);
-//     for (let z = 0; z < WIDTH; z++) {
-//       console.log(i, z);
-//       const IZ = [i, z];
-//       board.insert(i, z)
-//     }
-//   }
-// };
 
