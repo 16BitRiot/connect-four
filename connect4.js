@@ -9,11 +9,10 @@ const WIDTH = 7;
 const HEIGHT = 6;
 let currPlayer = 1;
 let board = [];
-const emptyRow = Array.apply(null, Array(WIDTH)); // make empty row
 let emptySelect = ``;
 let lowestY = '';
 const resetButton = document.getElementById('resetbtn');
-resetButton.addEventListener('click', handleClick);
+
 
 /** makeBoard: create in-JS board structure:
  *  board = array of rows, each row is array of cells  (board[y][x])*/
@@ -38,6 +37,7 @@ function makeHtmlBoard() {
   const top = document.createElement("tr");
   top.setAttribute("id", "column-top");
   top.addEventListener("click", handleClick);
+  resetButton.addEventListener('click', handleClick);
 
   // Create X Axis (Columns)
   for (let z = 0; z < WIDTH; z++) {
@@ -75,13 +75,13 @@ function findSpotForCol(x) {
       emptySelect = HTMLCellSelect;
     }
     if (JSCellSelect === 1) {
-      if (i === 0){
+      if (i === 0) {
         return null;
       }
       return i - 1;
     }
     if (JSCellSelect === 2) {
-      if (i === 0){
+      if (i === 0) {
         return null;
       }
       return i - 1;
@@ -158,7 +158,7 @@ function checkForWin() {
 
 function handleClick(evt) {
   console.log(evt.target)
-  if (evt.target === resetButton){
+  if (evt.target === resetButton) {
     window.location.reload();
   }
   // get x from ID of clicked cell
